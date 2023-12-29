@@ -4,7 +4,6 @@ import { useQuery } from 'react-query';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
-// fetchImages 関数の定義
 const fetchImages = async () => {
   try {
     const response = await axios.get('/api/getImages');
@@ -68,8 +67,17 @@ const ImageUploader = () => {
           <input
             type="file"
             onChange={(e) => handleFileUpload(e, document.querySelector('input[name="orientation"]:checked').value)}
-            className="bg-gray-800 text-white py-2 px-4 rounded"
+            className="bg-gray-800 text-white py-2 px-4 rounded mr-2"
           />
+          <button
+            onClick={() => {
+              const selectedOrientation = document.querySelector('input[name="orientation"]:checked').value;
+              handleFileUpload(document.querySelector('input[type="file"]'), selectedOrientation);
+            }}
+            className="bg-blue-500 text-white py-2 px-4 rounded"
+          >
+            Upload
+          </button>
           {images && (
             <div className="mt-8">
               <h2 className="text-2xl font-bold mb-4">Uploaded Images</h2>
