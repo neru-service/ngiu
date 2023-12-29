@@ -4,6 +4,17 @@ import { useQuery } from 'react-query';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
+// fetchImages 関数の定義
+const fetchImages = async () => {
+  try {
+    const response = await axios.get('/api/getImages');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching images:', error);
+    throw error;
+  }
+};
+
 const ImageUploader = () => {
   const router = useRouter();
   const { data: images, refetch } = useQuery('images', fetchImages);
